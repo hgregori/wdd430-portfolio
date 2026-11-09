@@ -17,6 +17,9 @@ export default function Header() {
           <li>
             <Link href="/about" className="hover:underline transition-all">About</Link>
           </li>
+          <li>
+            <Link href="/projects" className="hover:underline transition-all">Projects</Link>
+          </li>
         </ul>
       </nav>
     </header>
