@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import NavLinks from './NavLinks';
 
 export default function Header() {
   return (
@@ -10,17 +11,7 @@ export default function Header() {
           </Link>
           <span className="block text-xs text-blue-200">Portfolio</span>
         </div>
-        <ul className="flex gap-6">
-          <li>
-            <Link href="/" className="hover:underline transition-all">Home</Link>
-          </li>
-          <li>
-            <Link href="/about" className="hover:underline transition-all">About</Link>
-          </li>
-          <li>
-            <Link href="/projects" className="hover:underline transition-all">Projects</Link>
-          </li>
-        </ul>
+        <NavLinks />
       </nav>
     </header>
   );

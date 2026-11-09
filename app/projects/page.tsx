@@ -1,26 +1,41 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import ProjectList from '@/components/ProjectList';
+import { Project } from '@/lib/projects-db';
 
-function HeaderHeadingProject() {
-  const [counterLikes, setCounter] = useState(0);
+export default function ProjectsOverviewPage() {
+  const [projects, setProjects] = useState<Project[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-  function addCounteLike() {
-    setCounter((prev) => prev + 1);
-  }
+  useEffect(() => {
+    fetch('/api/projects')
+      .then((res) => {
+        if (!res.ok) throw new Error('Failed to fetch projects');
+        return res.json();
+      })
+      .then((data: Project[]) => {
+        setProjects(data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        setError(err.message);
+        setLoading(false);
+      });
+  }, []);
 
   return (
     <div>
-      <h1 className="text-3xl font-bold mb-4">Projects Overview</h1>
-      <p className="mb-2">Likes: {counterLikes}</p>
-      <button
-        onClick={addCounteLike}
-        className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
-      >
-        LIKE
-      </button>
+      <h2 className="text-2xl font-bold mb-4">Projects Overview</h2>
+      {loading && <p className="text-gray-500">Loading projects...</p>}
+      {error && <p className="text-red-500">Error: {error}</p>}
+      {!loading && !error && projects.length === 0 && (
+        <p className="text-gray-500">No projects found.</p>
+      )}
+      {!loading && !error && projects.length > 0 && (
+        <ProjectList projects={projects} />
+      )}
     </div>
   );
 }
-
-export default HeaderHeadingProject;
