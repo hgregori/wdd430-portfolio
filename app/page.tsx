@@ -1,17 +1,23 @@
 import ProjectList from '@/components/ProjectList';
-const projects = [
+import { Project } from '@/lib/projects-db';
+
+const projects: Project[] = [
   {
+    id: 101,
     title: 'Software Dev',
     description: 'A full-stack Next.js app for managing products.',
+    type: 'school',
     technologies: ['node.js', 'react', 'Next.js', 'React', 'TypeScript', 'Tailwind CSS'],
-    link: 'https://github.com/hgregori/wdd430-portfolio'
+    link: 'https://github.com/hgregori/wdd430-portfolio',
   },
   {
+    id: 102,
     title: 'Weather Everyday',
     description: 'A React app that fetches and displays weather data.',
+    type: 'school',
     technologies: ['react', 'javascript', 'css', 'apis', 'html'],
-    link: 'https://github.com/hgregori/weather-everyday'
-  }
+    link: 'https://github.com/hgregori/weather-everyday',
+  },
 ];
 
 export default function Home() { 
